@@ -1,5 +1,6 @@
 #include <stdlib>
 #include <iostream>
+#include "Individu.hpp"
 
 using namespace std;
 
