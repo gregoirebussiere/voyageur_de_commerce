@@ -21,7 +21,8 @@ population::population(float len,int len_ind,float mut,float cons,float cross)
     prop_cons = cons;
     prop_cross = cross;
     for (i=0;i<card;i++){
-        next = chemin(len_ind);
+        next = chemin(len_ind, const matrice &M);
+        push_back(next,*individus);
     }
-    *individus
 }
+
