@@ -1,11 +1,11 @@
 #include <stdlib>
 #include <iostream>
-#include "Individu.hpp"
+#include "individu.hpp"
 
 using namespace std;
 
-class Chemin : public Individu
+class chemin : public individu
 {
     public:
-    Chemin(int)
+    chemin(int)
 }

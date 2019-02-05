@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Individu
+class individu
 {
     protected:
     int size;

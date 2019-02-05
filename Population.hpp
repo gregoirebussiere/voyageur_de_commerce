@@ -1,18 +1,18 @@
-#ifndef Population_H
-#define Population_H
+#ifndef population_H
+#define population_H
 
 #include <stdlib>
 #include <iostream>
-#include "Chemin.hpp" 
+#include "chemin.hpp" 
 
 
 using namespace std;
 
-class Population
+class population
 {
     private:
     int card;
-    Individu *Individus;
+    individu *individus;
     float prop_mut;
     float prop_cross;
     float prop_cons;
@@ -20,11 +20,11 @@ class Population
 
     public:
     
-    Population();
-    Population(int len,float mut,float cons,float cross);
+    population();
+    population(int len,float mut,float cons,float cross);
     tri();
     tronque(prop_cons);
-    insere(const Chemin &);
+    insere(const chemin &);
     mutation(prop_mutation);
     crossover(prop_cross);
 }
