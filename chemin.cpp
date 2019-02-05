@@ -33,6 +33,15 @@ chemin::~chemin()
     if(val_!=NULL) delete [] val_;
 }
 
+
+chemin::mutation()
+{
+    gene_mute1 = rand() % dim_;
+    gene_mute2 = rand() % dim_;
+    val_[gene_mute1],val[gene_mute2] = val[gene_mute2],val[gene_mute1];
+}
+
+
 int chemin::dim() const
 {
     return dim_;

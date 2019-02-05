@@ -25,7 +25,6 @@ class population
     population(int len,int len_ind,float mut,float cons,float cross);
     tri();
     tronque(prop_cons);
-    insere(const chemin &);
-    mutation(prop_mutation);
-    crossover(prop_cross);
+    mutation_pop(prop_mutation);
+    crossover_pop(prop_cross);
 }

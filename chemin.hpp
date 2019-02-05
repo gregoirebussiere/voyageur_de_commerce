@@ -29,6 +29,8 @@ class chemin
     int dim() const; //acces a la dimension
     double fit() const;
     int & operator()(int) const;
+
+    virtual mutation();
 };
 
 
