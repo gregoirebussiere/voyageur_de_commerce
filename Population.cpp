@@ -10,3 +10,12 @@ Population::Population()
     prop_cons = 0;
     prop_cross = 0;
 }
+
+Population::Population(float len,float mut,float cons,float cross)
+{
+    card = len;
+    *Individus = [];
+    prop_mut = mut;
+    prop_cons = cons;
+    prop_cross = cross;
+}

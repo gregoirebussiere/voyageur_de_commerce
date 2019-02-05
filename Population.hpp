@@ -21,7 +21,7 @@ class Population
     public:
     
     Population();
-    Population(card);
+    Population(int len,float mut,float cons,float cross);
     tri();
     tronque(prop_cons);
     insere(const Chemin &);
