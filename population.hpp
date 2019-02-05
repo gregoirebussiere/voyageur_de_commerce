@@ -12,6 +12,7 @@ class population
 {
     private:
     int card;
+    int len_ind;
     individu *individus;
     float prop_mut;
     float prop_cross;
@@ -21,7 +22,7 @@ class population
     public:
     
     population();
-    population(int len,float mut,float cons,float cross);
+    population(int len,int len_ind,float mut,float cons,float cross);
     tri();
     tronque(prop_cons);
     insere(const chemin &);
