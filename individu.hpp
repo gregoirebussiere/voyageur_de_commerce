@@ -1,4 +1,4 @@
-#include <stdlib>
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -15,6 +15,5 @@ class individu
     individu();
     individu(int size, int *data);
     virtual ~individu();
-    virtual mutation() = 0;
-}
-individu operator *(const individu &ind1, const individu &ind2);
+    virtual individu* mutation() = 0;
+};
