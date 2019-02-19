@@ -5,6 +5,8 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
+#include <fstream>
+
 
 
 
@@ -84,7 +86,7 @@ matrice gener_graphe(villes * V,int taille) //fonction qui genere une matrice à
 return(M);
 }
 
-matrice remplir_villes(int taille)
+matrice remplir_villes(int taille) // ici on utlise l'entréé de commande pour remplir tout les donnés
 {
     villes *V= new villes[taille];
     for (int i=0;i<taille;i++)
@@ -114,6 +116,56 @@ matrice remplir_villes(int taille)
     }
 
     matrice M1=gener_graphe(V,taille);
+    for(int i=0;i<taille;i++)
+    {
+        delete [] V[i].voisins;
+    }
 
+    delete [] V;
     return(M1);
+}
+
+
+
+matrice remplir_villesf(std::string nom_fichier)
+{
+     ifstream fichier(nom_fichier, ios::in);
+     if(fichier)
+     {
+
+         int taille;
+         fichier>> taille;
+
+
+         villes *V= new villes[taille];
+
+        string nom;
+        double x;
+        double y;
+        int vois;
+         for (int i=0;i<taille;i++)
+         {
+             fichier >> nom >> x >> y;
+             V[i].nom=nom;
+             V[i].x=x;
+             V[i].y=y;
+             V[i].voisins= new int[taille];
+             for (int j=0;j<taille;j++)
+             {
+
+                 fichier >> vois;
+                 V[i].voisins[j]=vois;
+             }
+         }
+         fichier.close();
+
+    matrice M1=gener_graphe(V,taille);
+    for(int i=0;i<taille;i++)
+    {
+        delete [] V[i].voisins;
+    }
+
+    delete [] V;
+    return(M1);
+    }
 }
