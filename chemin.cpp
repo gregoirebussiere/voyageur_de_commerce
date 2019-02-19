@@ -1,3 +1,4 @@
+#include "individu.hpp"
 #include "chemin.hpp"
 #include <cstdlib>
 #include <iostream>
@@ -13,18 +14,15 @@ chemin::chemin(int n, const matrice &M)
     //calcul de fitnees
     fit_=fitness(M);
 
-
-
 }
 
-chemin::chemin(const chemin &V, const matrice &M)
+chemin::chemin(const chemin &V)
 {
     dim_=V.dim_; val_=NULL;
     if(dim_<=0) return;
     val_=new int[dim_];
     for(int k=1; k<=dim_;k++) val_[k]=V.val_[k];
-    fit_=fitness(M);
-
+    fit_=V.fit_;
 
 }
 
@@ -62,6 +60,17 @@ int & chemin::operator()(int i) const
 {
     return val_[i];
 }
+
+chemin::chemin* mutation()
+{
+    chemin A = chemin(const *this)
+    int gene_mute1 = rand() % dim_;
+    int gene_mute2 = rand() % dim_;
+    A.val_[gene_mute1] = val_[gene_mute2];
+    A.val_[gene_mute2] = val_[gene_mute1];
+    return();
+}
+
 
 ostream & operator<<(ostream &os, const chemin &V)
 {

@@ -6,12 +6,11 @@ using namespace std;
 class individu
 {
     protected:
-    int size;
-    int *data;
+    int dim_;
+    int *val_;
     
     public:
-    double fitness;
-
+    double fit_;
     individu();
     individu(int size, int *data);
     virtual ~individu();
