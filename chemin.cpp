@@ -13,32 +13,24 @@ chemin::chemin(int n, const matrice &M)
     //calcul de fitnees
     fit_=fitness(M);
 
+
+
 }
 
-chemin::chemin(const chemin &V)
+chemin::chemin(const chemin &V, const matrice &M)
 {
     dim_=V.dim_; val_=NULL;
     if(dim_<=0) return;
     val_=new int[dim_];
     for(int k=1; k<=dim_;k++) val_[k]=V.val_[k];
-    fit_=V.fit_;
+    fit_=fitness(M);
+
 
 }
 
 chemin::~chemin()
 {
     if(val_!=NULL) delete [] val_;
-}
-
-
-chemin mutation(const chemin &V)
-{
-    chemin A = chemin(V);
-    int gene_mute1 = rand() % V.dim_;
-    int gene_mute2 = rand() % V.dim_;
-    A.val_[gene_mute1] = V.val_[gene_mute2];
-    A.val_[gene_mute2] = V.val_[gene_mute1];
-    return(A);
 }
 
 int chemin::dim() const
@@ -118,5 +110,36 @@ double chemin::fitness(const matrice &M)
     S=S+M(val_[dim_]+1,val_[1]+1); //decalage entre indice de chemin et incdice dans la matrice
     fit_=S;
     return(fit_);
+}
+
+void chemin::set(int i, int k, const matrice &M)
+{
+    if ((i<0) || (i>dim_))
+    {
+        cout<<"indice en dehors du chemin";
+        exit(-1);
+    }
+
+    val_[i]=k;
+    fit_=fitness(M);
+}
+
+bool chemin::admissible()
+{
+    int *marquage= new int[dim_];
+    for(int i=1;i<=dim_;i++) marquage[i]=0; //tableau qui marque si on est passé par une ville ou non, 0 pour non 1 pour oui
+    for(int k=1;k<=dim_;k++)
+    {
+      if (marquage[val_[k]]==1)
+            {
+                return(false);
+            }
+      else
+      {
+          marquage[val_[k]]=1;
+      }
+    }
+    return(true);
+    delete [] marquage;
 }
 
