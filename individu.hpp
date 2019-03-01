@@ -1,18 +1,24 @@
+#ifndef individu_H
+#define individu_H
 #include <cstdlib>
 #include <iostream>
 
 using namespace std;
 
-class individu
+class Individu
 {
     protected:
+
     int dim_;
     int *val_;
-    
-    public:
     double fit_;
-    individu();
-    individu(int size, int *data);
-    virtual ~individu();
-    virtual individu* mutation() = 0;
+
+
+    public:
+
+    Individu(){};
+    Individu(int dim, int *val){};
+    virtual ~Individu(){if(val_!=NULL) delete [] val_;}
+    //virtual Individu* mutation() = 0;
 };
+#endif

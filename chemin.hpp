@@ -8,44 +8,39 @@
 
 using namespace std;
 
-class chemin: public individu
+class Chemin: public Individu
 {
     public:
-    int dim_;
-    int *val_;
-    int fit_;
 
-    chemin(): dim_(0), val_(NULL),fit_(0) {} //constructeur par défaut
-    chemin(int, const matrice &); //constructeur dimensions et matrice le chemin choisi est 0,1,2,...,n
-    chemin(const chemin &); //constructeur par copie
-    ~chemin(); //destructeur
+    Chemin(){dim_=0;val_= NULL;fit_=0;}
+    Chemin(int, const Matrice &); //constructeur dimensions et Matrice le Chemin choisi est 0,1,2,...,n
+    Chemin(const Chemin &); //constructeur par copie
 
 
-    bool operator==(const chemin &); //test d'égalité
-    bool operator !=(const chemin &); //test de différence
 
-    double fitness(const matrice &);
+    bool operator==(const Chemin &); //test d'égalité
+    bool operator !=(const Chemin &); //test de différence
+
+    double fitness(const Matrice &);
 
     int dim() const; //acces a la dimension
     double fit() const;
     int & operator()(int) const;
-    void set(int i, int k, const matrice &); // modifie la valuer i du chemin qui prend la valuer k
+    void set(int i, int k, const Matrice &); // modifie la valuer i du Chemin qui prend la valuer k
 
     bool admissible(); //fonction qui vérifie que l'on passe une et une seule fois par chauqe ville
 
-    chemin* mutation();
+    Chemin mutation();
 
 
 };
 
-chemin operator *(const chemin &chemin1, const chemin &chemin2);
+Chemin operator *(const Chemin &Chemin1, const Chemin &Chemin2);
 
-ostream & operator<<(ostream &, const chemin &); //sortie
-istream & operator>>(istream &, chemin &); //entree
-
-
-
-
-
+ostream & operator<<(ostream &, const Chemin &); //sortie
+istream & operator>>(istream &, Chemin &); //entree
 
 #endif
+
+
+

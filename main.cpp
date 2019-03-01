@@ -2,17 +2,20 @@
 #include <iostream>
 #include "chemin.hpp"
 #include "matrice_g.hpp"
+#include "villes.hpp"
 
 using namespace std;
 
 int main(){
-    matrice B = matrice();
-    chemin V = chemin();
-    V.dim_= 2;
-    V.val_= new int[2];
-    V.val_[0] = 0;
-    V.val_[1] = 1;
-    chemin chemin_mute =  mutation(V);
+    Chemin V;
+    Matrice M = remplir_villesf("f_ville.txt");
+    cout<<M<<endl;
+    Chemin A = Chemin(3,M);
+    Chemin B = Chemin(A);
+    cout<<B<<endl;
+    cout<<B.mutation()<<endl;
+
+
 
     return 0;
 }
