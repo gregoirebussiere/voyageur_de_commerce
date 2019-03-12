@@ -1,11 +1,11 @@
 10
-Paris       0 0 0 1 1 1 1 1 1 1 1 1 
-Brest       2 0 1 0 1 1 1 1 1 1 1 1
-Marseille   3 4 1 1 0 1 1 1 1 1 1 1
-Angers      1 1 1 1 1 0 1 1 1 1 1 1 
-Toulouse    2 3 1 1 1 1 0 1 1 1 1 1
-Caen        1 5 1 1 1 1 1 0 1 1 1 1 
-Rouen       5 1 1 1 1 1 1 1 0 1 1 1
-Quimper     2 1 1 1 1 1 1 1 1 0 1 1 
-Biarritz     2.5 3 1 1 1 1 1 1 1 1 0 1
-Starsbourg  3 0 1 1 1 1 1 1 1 1 1 0
+Paris       0 0 0 1 1 1 0 1 1 0 1 1 
+Brest       2 0 1 0 1 0 1 1 1 1 1 1
+Marseille   3 4 1 1 0 1 1 0 1 0 1 1
+Angers      1 1 1 0 1 0 1 0 1 0 1 1 
+Toulouse    2 3 0 1 1 1 0 1 1 1 1 0
+Caen        1 5 1 1 0 1 1 0 1 0 1 1 
+Rouen       5 1 1 1 1 0 1 1 0 1 1 1
+Quimper     2 1 1 1 1 1 0 1 1 0 1 1 
+Biarritz     2.5 3 0 1 0 1 1 0 0 1 0 1
+Starsbourg  3 0 1 1 0 1 0 1 0 1 1 0
