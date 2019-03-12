@@ -65,6 +65,7 @@ int & Chemin::operator()(int i) const
 
 Chemin Chemin::mutation()
 {
+
     Chemin A = Chemin(*this);
     int gene_mute1 = rand() % dim_;
     int gene_mute2 = rand() % dim_;
@@ -161,7 +162,8 @@ void Chemin::set_fitness(double x)
 }
 
 Chemin crossover(const Chemin &Chemin1, const Chemin &Chemin2, const Matrice &M) //on crée un nouvel individu à partir de deux chemins on commence par couper au mileieu
-{   int limite=Chemin1.dim()/2;
+{   int limite=rand() % Chemin1.dim();
+
     Chemin NewC=Chemin(Chemin2);
     for(int i=0;i<limite;i++) NewC.val()[i]=Chemin1.val()[i];
 

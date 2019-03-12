@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include "chemin.hpp"
 #include "matrice_g.hpp"
@@ -11,15 +12,27 @@ int main(){
     Matrice M = remplir_villesf("f_ville.txt");
     cout<<M<<endl;
 
-    Chemin A = Chemin(3,M);
-    cout<<A;
+    Chemin A = Chemin(10,M);
+    cout<<A<<endl;
 
     Chemin B = Chemin(A);
-    B.val()[0]=6;
-    cout<<A;
+
+    B.set(6,3,M);
+    B.set(8,1,M);
+    B.set(1,9,M);
+
     cout<<B;
+
+
+    srand(time(NULL));
     Chemin C=crossover(B,A,M);
-    cout<<C;
+    cout<<C<<endl;
+
+
+
+
+
+
 
 
 
