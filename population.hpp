@@ -7,10 +7,10 @@
 
 
 using namespace std;
-/*
+
 class population
 {
-    private:
+    protected:
     int card;
     int len_ind;
     Individu *individus;
@@ -21,11 +21,11 @@ class population
 
     public:
 
-    population();
+    population(){card=0;len_ind=0;individus=NULL;prop_mut=0;prop_cross=0;prop_cons=0};
     population(int len,int len_ind,float mut,float cons,float cross);
     tri();
     tronque(prop_cons);
     mutation_pop(prop_mutation);
     crossover_pop(prop_cross);
-}*/
+}
 #endif
