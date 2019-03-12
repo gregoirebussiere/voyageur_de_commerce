@@ -14,6 +14,7 @@ class Individu
     double fit_;
 
 
+
     public:
 
     Individu(){};

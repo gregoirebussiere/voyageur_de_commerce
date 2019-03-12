@@ -7,31 +7,31 @@
 
 using namespace std;
 
-//class matrice definition
+//class Matrice definition
 
-class matrice
+class Matrice
 {
-    public:
-    int dim_; //dimension de la matrice
+    protected:
+    int dim_; //dimension de la Matrice
     double * val_; //tableau des valeurs
 
+    public:
+    Matrice(): dim_(0), val_(NULL) {} //constructeur par défaut
+    Matrice(int , double v=-1.); //constructeur dimensions et val. intiale
+    Matrice(const Matrice &); //constructeur par copie
+    ~Matrice(); //destructeur
 
-    matrice(): dim_(0), val_(NULL) {} //constructeur par défaut
-    matrice(int , double v=-1.); //constructeur dimensions et val. intiale
-    matrice(const matrice &); //constructeur par copie
-    ~matrice(); //destructeur
 
-
-    bool operator==(const matrice &); //test d'égalité
-    bool operator !=(const matrice &); //test de différence
+    bool operator==(const Matrice &); //test d'égalité
+    bool operator !=(const Matrice &); //test de différence
 
     int dim() const; //acces a la dimension
     double & operator()(int, int) const;
 };
 
 
-ostream & operator<<(ostream &, const matrice &); //sortie
-istream & operator>>(istream &, matrice &); //entree
+ostream & operator<<(ostream &, const Matrice &); //sortie
+istream & operator>>(istream &, Matrice &); //entree
 
 
 #endif
