@@ -1,44 +1,49 @@
-#include "individu.hpp"
 #include "chemin.hpp"
 #include <cstdlib>
 #include <iostream>
 
 using namespace std;
 
-Chemin::Chemin(int n, const Matrice &M)
+chemin::chemin(int n, const matrice &M)
 {
     if(n<=0) return;
     dim_=n; val_=NULL;
     val_=new int[dim_];
     for(int k=1;k<=dim_;k++) val_[k]=k-1;
+    //calcul de fitnees
     fit_=fitness(M);
+
+
 
 }
 
-Chemin::Chemin(const Chemin &V)
+chemin::chemin(const chemin &V, const matrice &M)
 {
-    dim_=V.dim(); val_=NULL;
+    dim_=V.dim_; val_=NULL;
     if(dim_<=0) return;
     val_=new int[dim_];
     for(int k=1; k<=dim_;k++) val_[k]=V.val_[k];
-    fit_=V.fit_;
+    fit_=fitness(M);
+
 
 }
 
+chemin::~chemin()
+{
+    if(val_!=NULL) delete [] val_;
+}
 
-
-int Chemin::dim() const
+int chemin::dim() const
 {
     return dim_;
 }
 
-double Chemin::fit() const
+double chemin::fit() const
 {
     return fit_;
 }
 
-
-bool Chemin::operator==(const Chemin&V)
+bool chemin::operator==(const chemin&V)
 {
     if(dim_!=V.dim_) return false;
 
@@ -48,54 +53,43 @@ bool Chemin::operator==(const Chemin&V)
     return true;
 }
 
-bool Chemin::operator!=(const Chemin &V)
+bool chemin::operator!=(const chemin &V)
 {
     return !((*this)==V);
 }
 
-int & Chemin::operator()(int i) const
+int & chemin::operator()(int i) const
 {
     return val_[i];
 }
 
-Chemin Chemin::mutation()
+ostream & operator<<(ostream &os, const chemin &V)
 {
-    Chemin A = Chemin(*this);
-    int gene_mute1 = rand() % dim_;
-    int gene_mute2 = rand() % dim_;
-    A.val_[gene_mute1] = val_[gene_mute2];
-    A.val_[gene_mute2] = val_[gene_mute1];
-    return(A);
-}
-
-
-ostream & operator<<(ostream &os, const Chemin &V)
-{
-    os<<"Chemin de taille "<<V.dim()<<endl;
-    for(int i=1; i<=V.dim();i++)
+    os<<"chemin de taille "<<V.dim_<<endl;
+    for(int i=1; i<=V.dim_;i++)
     {
         os<<V(i)<<" ";
     }
     os<<endl;
-    os<<"Chemin de longeur "<<V.fit()<<endl;
+    os<<"chemin de longeur "<<V.fit_<<endl;
     return os;
 }
 
-istream & operator>>(istream &is, const Chemin &V)
+istream & operator>>(istream &is, const chemin &V)
 {
 
-    for(int i=1; i<=V.dim();i++)
+    for(int i=1; i<=V.dim_;i++)
     {
         is>>V(i);
     }
     return is;
 }
 
-double Chemin::fitness(const Matrice &M)
+double chemin::fitness(const matrice &M)
 {
     if ((dim_<=0) || (M.dim_<=0))
     {
-        cout<<"Chemin ou Matrice vide";
+        cout<<"chemin ou matrice vide";
         exit(-1);
     }
     double S=0.;
@@ -113,17 +107,16 @@ double Chemin::fitness(const Matrice &M)
     {
      return(-1);
     }
-    S=S+M(val_[dim_]+1,val_[1]+1); //decalage entre indice de Chemin et indice dans la Matrice
+    S=S+M(val_[dim_]+1,val_[1]+1); //decalage entre indice de chemin et incdice dans la matrice
     fit_=S;
     return(fit_);
 }
 
-
-void Chemin::set(int i, int k, const Matrice &M)
+void chemin::set(int i, int k, const matrice &M)
 {
     if ((i<0) || (i>dim_))
     {
-        cout<<"indice en dehors du Chemin";
+        cout<<"indice en dehors du chemin";
         exit(-1);
     }
 
@@ -131,7 +124,7 @@ void Chemin::set(int i, int k, const Matrice &M)
     fit_=fitness(M);
 }
 
-bool Chemin::admissible()
+bool chemin::admissible()
 {
     int *marquage= new int[dim_];
     for(int i=1;i<=dim_;i++) marquage[i]=0; //tableau qui marque si on est passé par une ville ou non, 0 pour non 1 pour oui

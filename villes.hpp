@@ -1,5 +1,4 @@
-#ifndef Ville_H
-#define Ville_H
+
 #include "matrice_g.hpp"
 #include <cstdlib>
 #include <iostream>
@@ -14,15 +13,15 @@
 using namespace std;
 
 
-class Ville
+class villes
 {
     public:
     std::string nom;
     double x;
     double y;
-    int *voisins; //tableau d'entiers de toutes les Ville vaut 1 si deux Ville  sont  voisins 0 sinon
+    int *voisins; //tableau d'entiers de toutes les villes vaut 1 si deux villes  sont  voisins 0 sinon
 
-    Ville & operator=(const Ville & V1)
+    villes & operator=(const villes & V1)
     {
         if(this==&V1) return *this;
         nom=V1.nom;
@@ -37,14 +36,14 @@ class Ville
 };
 
 
-double distance_ville(Ville V1, Ville V2)
+double distance_ville(villes V1, villes V2)
 {
     double d=sqrt((V1.x-V2.x)*(V1.x-V2.x)+(V1.y-V2.y)*(V1.y-V2.y));
     return(d);
 }
 
 
-int indice_ville(std::string nom, Ville *V, int taille)
+int indice_ville(std::string nom, villes *V, int taille)
 {
     int resultat=-1;
     for(int i=0;i<taille;i++)
@@ -54,17 +53,17 @@ int indice_ville(std::string nom, Ville *V, int taille)
     return(resultat);
 }
 
-int est_voisin(int i,int j,Ville *V)
+int est_voisin(int i,int j,villes *V)
 {
-  Ville V_=V[i];
+  villes V_=V[i];
   return(V_.voisins[j]);
 }
 
 
-Matrice gener_graphe(Ville * V,int taille) //fonction qui genere une matrice à partir d'une liste de Ville  , taille correspond au nombre de Ville dans la graphe
+matrice gener_graphe(villes * V,int taille) //fonction qui genere une matrice à partir d'une liste de villes  , taille correspond au nombre de villes dans la graphe
 {
     int n=taille;
-    Matrice M(n);
+    matrice M(n);
     for(int i=0;i<n;i++)
     {
 
@@ -74,7 +73,7 @@ Matrice gener_graphe(Ville * V,int taille) //fonction qui genere une matrice à 
           {
              double d=distance_ville(V[i],V[j]);
              M(i+1,j+1)=d;
-             M(j+1,i+1)=d;// attetion les indcies des matrices et des valeurs des Ville sont décalés d'ou  la necessité de mettre le +1, à changer possibilement
+             M(j+1,i+1)=d;// attetion les indcies des matrices et des valeurs des villes sont décalés d'ou  la necessité de mettre le +1, à changer possibilement
           }
           else
           {
@@ -87,9 +86,9 @@ Matrice gener_graphe(Ville * V,int taille) //fonction qui genere une matrice à 
 return(M);
 }
 
-Matrice remplir_villes(int taille) // ici on utlise l'entréé de commande pour remplir toutes les données
+matrice remplir_villes(int taille) // ici on utlise l'entréé de commande pour remplir tout les donnés
 {
-    Ville *V= new Ville[taille];
+    villes *V= new villes[taille];
     for (int i=0;i<taille;i++)
     {
       std::string nom;
@@ -116,7 +115,7 @@ Matrice remplir_villes(int taille) // ici on utlise l'entréé de commande pour 
 
     }
 
-    Matrice M1=gener_graphe(V,taille);
+    matrice M1=gener_graphe(V,taille);
     for(int i=0;i<taille;i++)
     {
         delete [] V[i].voisins;
@@ -128,9 +127,9 @@ Matrice remplir_villes(int taille) // ici on utlise l'entréé de commande pour 
 
 
 
-Matrice remplir_villesf(string nom_fichier)
+matrice remplir_villesf(std::string nom_fichier)
 {
-     ifstream fichier(nom_fichier.c_str(), ios::in);
+     ifstream fichier(nom_fichier, ios::in);
      if(fichier)
      {
 
@@ -138,7 +137,7 @@ Matrice remplir_villesf(string nom_fichier)
          fichier>> taille;
 
 
-         Ville *V= new Ville[taille];
+         villes *V= new villes[taille];
 
         string nom;
         double x;
@@ -160,7 +159,7 @@ Matrice remplir_villesf(string nom_fichier)
          }
          fichier.close();
 
-    Matrice M1=gener_graphe(V,taille);
+    matrice M1=gener_graphe(V,taille);
     for(int i=0;i<taille;i++)
     {
         delete [] V[i].voisins;
@@ -170,4 +169,3 @@ Matrice remplir_villesf(string nom_fichier)
     return(M1);
     }
 }
-#endif

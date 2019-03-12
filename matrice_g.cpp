@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Matrice::Matrice(int n, double v)
+matrice::matrice(int n, double v)
 {
     if(n<=0) return;
     dim_=n; val_=NULL;
@@ -14,7 +14,7 @@ Matrice::Matrice(int n, double v)
 
 }
 
-Matrice::Matrice(const Matrice &V)
+matrice::matrice(const matrice &V)
 {
     dim_=V.dim_; val_=NULL;
     if(dim_<=0) return;
@@ -23,17 +23,17 @@ Matrice::Matrice(const Matrice &V)
     for(int k=0; k<d;k++) val_[k]=V.val_[k];
 }
 
-Matrice::~Matrice()
+matrice::~matrice()
 {
     if(val_!=NULL) delete [] val_;
 }
 
-int Matrice::dim() const
+int matrice::dim() const
 {
     return dim_;
 }
 
-bool Matrice::operator==(const Matrice&V)
+bool matrice::operator==(const matrice&V)
 {
     if(dim_!=V.dim_) return false;
 
@@ -44,17 +44,17 @@ bool Matrice::operator==(const Matrice&V)
     return true;
 }
 
-bool Matrice::operator!=(const Matrice &V)
+bool matrice::operator!=(const matrice &V)
 {
     return !((*this)==V);
 }
 
-double & Matrice::operator()(int i,int j) const
+double & matrice::operator()(int i,int j) const
 {
     return val_[(j-1)*dim_+i-1];
 }
 
-ostream & operator<<(ostream &os, const Matrice &M)
+ostream & operator<<(ostream &os, const matrice &M)
 {
     os<<"graphe de dimensions "<<M.dim_<<endl;
     for(int i=1; i<=M.dim_;i++)
@@ -66,7 +66,7 @@ ostream & operator<<(ostream &os, const Matrice &M)
     return os;
 }
 
-istream & operator>>(istream &is, const Matrice &M)
+istream & operator>>(istream &is, const matrice &M)
 {
 
     for(int i=1; i<=M.dim_;i++)
