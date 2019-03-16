@@ -1,128 +1,48 @@
 #include "individu.hpp"
 #include "chemin.hpp"
-#include <cstdlib>
-#include <iostream>
+
 
 using namespace std;
 
-Chemin::Chemin(int n, const Matrice &M)
+Chemin::Chemin(int n, const Matrice &M) : Individu(n)
 {
-    if(n<=0) return;
-    dim_=n; val_=NULL;
-    val_=new int[dim_];
     for(int k=0;k<dim_;k++) val_[k]=k;
     fit_=fitness(M);
 
 }
 
-Chemin::Chemin(const Chemin &V)
+Chemin Chemin::rand_perm(const Matrice &M)
 {
-    dim_=V.dim(); val_=NULL;
-    if(dim_<=0) return;
-    val_=new int[dim_];
-    for(int k=0; k<dim_;k++) val_[k]=V.val_[k];
-    fit_=V.fit_;
-
-}
-
-
-
-int Chemin::dim() const
-{
-    return dim_;
-}
-
-double Chemin::fit() const
-{
-    return fit_;
-}
-
-int * Chemin::val() const
-{
-     return val_;
-}
-
-
-bool Chemin::operator==(const Chemin&V)
-{
-    if(dim_!=V.dim_) return false;
-
-    int *pM=val_;
-    int *pV=V.val_;
-    for(int i=0;i<dim_;i++,pM++,pV++) if ((*pM)!=(*pV)) return false;
-    return true;
-}
-
-bool Chemin::operator!=(const Chemin &V)
-{
-    return !((*this)==V);
-}
-
-int & Chemin::operator()(int i) const
-{
-    return val_[i];
-}
-
-Chemin Chemin::mutation()
-{
-
-    Chemin A = Chemin(*this);
-    int gene_mute1 = rand() % dim_;
-    int gene_mute2 = rand() % dim_;
-    A.val_[gene_mute1] = val_[gene_mute2];
-    A.val_[gene_mute2] = val_[gene_mute1];
+    for (int i=dim_-1;i>=0;i--){
+        int r=rand()%(i+1);
+        int v=val_[r];
+        val_[r]=val_[i];
+        val_[i]=v;
+    };
+    Chemin A=Chemin(*this);
+    A.fitness(M);
     return(A);
 }
 
 
-ostream & operator<<(ostream &os, const Chemin &V)
+Chemin Chemin::mutation(const Matrice &M)
 {
-    os<<"Chemin de taille "<<V.dim()<<endl;
-    for(int i=0; i<V.dim();i++)
-    {
-        os<<V(i)<<" ";
-    }
-    os<<endl;
-    os<<"Chemin de longeur "<<V.fit()<<endl;
-    return os;
+    int gene_mute1 = rand() %dim_;
+    int gene_mute2 = rand() % dim_;
+    int temp =val_[gene_mute1];
+    set(gene_mute1,val_[gene_mute2],M);
+    set(gene_mute2,temp,M);
+    Chemin A =Chemin(*this);
+    A.fitness(M);
+    return(A);
 }
 
-istream & operator>>(istream &is, const Chemin &V)
-{
 
-    for(int i=0; i<V.dim();i++)
-    {
-        is>>V(i);
-    }
-    return is;
-}
 
-double Chemin::fitness(const Matrice &M)
-{
-    if ((dim_<0) || (M.dim()<0))
-    {
-        cout<<"Chemin ou Matrice vide";
-        exit(-1);
-    }
-    double S=0.;
-    for (int i=0;i<dim_-1;i++){
-        if(M(val_[i],val_[i+1])<0)
-        {
-            return(-1);
-        }
 
-    S=S+M(val_[i],val_[i+1]);
 
-    }
 
-    if(M(val_[dim_-1],val_[0])<0)
-    {
-     return(-1);
-    }
-    S=S+M(val_[dim_-1],val_[0]); //decalage entre indice de Chemin et indice dans la Matrice
-    fit_=S;
-    return(fit_);
-}
+
 
 
 void Chemin::set(int i, int k, const Matrice &M)
@@ -134,7 +54,6 @@ void Chemin::set(int i, int k, const Matrice &M)
     }
 
     val_[i]=k;
-    fit_=fitness(M);
 }
 
 bool Chemin::admissible()
@@ -156,10 +75,7 @@ bool Chemin::admissible()
     delete [] marquage;
 }
 
-void Chemin::set_fitness(double x)
-{
-  double fit_=x;
-}
+
 
 Chemin crossover(const Chemin &Chemin1, const Chemin &Chemin2, const Matrice &M) //on crée un nouvel individu à partir de deux chemins on commence par couper au mileieu
 {   int limite=rand() % Chemin1.dim();

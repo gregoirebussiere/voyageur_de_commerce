@@ -4,6 +4,7 @@
 #include "chemin.hpp"
 #include "matrice_g.hpp"
 #include "villes.hpp"
+#include "population.hpp"
 
 using namespace std;
 
@@ -12,21 +13,21 @@ int main(){
     Matrice M = remplir_villesf("f_ville.txt");
     cout<<M<<endl;
 
-    Chemin A = Chemin(10,M);
+    /*Individu A=Individu(10,M);
+    Individu B=Individu(10,M);
     cout<<A<<endl;
+    cout<<B<<endl;
 
-    Chemin B = Chemin(A);
+    A.set(1,3,M);
+    A.set(3,1,M);
+    */
 
-    B.set(6,3,M);
-    B.set(8,1,M);
-    B.set(1,9,M);
-
-    cout<<B;
+   Population P=Population(4,10,0.5,0.5,0.5,M);
 
 
-    srand(time(NULL));
-    Chemin C=crossover(B,A,M);
-    cout<<C<<endl;
+
+
+
 
 
 
