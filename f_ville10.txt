@@ -1,0 +1,11 @@
+10
+Paris       7 7             0 1 1 1 1 1 1 1 1 1   
+Brest       0 8             1 0 1 1 1 1 1 1 1 1 
+Marseille   10 2            1 1 0 1 1 1 1 1 1 1 
+Palaiseau   6.8 6.5         1 1 1 0 1 1 1 1 1 1 
+Toulouse    6.5 3.5         1 1 1 1 0 1 1 1 1 1                     
+Caen        5 8             1 1 1 1 1 0 1 1 1 1               
+Rouen       7 7.5           1 1 1 1 1 1 0 1 1 1       
+Quimper     1 7             1 1 1 1 1 1 1 0 1 1               
+Biarritz    3.5 2           1 1 1 1 1 1 1 1 0 1             
+Starsbourg  12.5 7          1 1 1 1 1 1 1 1 1 0

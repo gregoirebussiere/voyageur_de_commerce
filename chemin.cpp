@@ -11,31 +11,7 @@ Chemin::Chemin(int n, const Matrice &M) : Individu(n)
 
 }
 
-Chemin Chemin::rand_perm(const Matrice &M)
-{
-    for (int i=dim_-1;i>=0;i--){
-        int r=rand()%(i+1);
-        int v=val_[r];
-        val_[r]=val_[i];
-        val_[i]=v;
-    };
-    Chemin A=Chemin(*this);
-    A.fitness(M);
-    return(A);
-}
 
-
-Chemin Chemin::mutation(const Matrice &M)
-{
-    int gene_mute1 = rand() %dim_;
-    int gene_mute2 = rand() % dim_;
-    int temp =val_[gene_mute1];
-    set(gene_mute1,val_[gene_mute2],M);
-    set(gene_mute2,temp,M);
-    Chemin A =Chemin(*this);
-    A.fitness(M);
-    return(A);
-}
 
 
 
@@ -77,18 +53,5 @@ bool Chemin::admissible()
 
 
 
-Chemin crossover(const Chemin &Chemin1, const Chemin &Chemin2, const Matrice &M) //on crée un nouvel individu à partir de deux chemins on commence par couper au mileieu
-{   int limite=rand() % Chemin1.dim();
-
-    Chemin NewC=Chemin(Chemin2);
-    for(int i=0;i<limite;i++) NewC.val()[i]=Chemin1.val()[i];
-
-    NewC.set_fitness(NewC.fitness(M));
-
-
-
-
-     return(NewC);
-}
 
 

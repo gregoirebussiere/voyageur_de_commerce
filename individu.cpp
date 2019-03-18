@@ -33,7 +33,7 @@ double Individu::fitness(const Matrice &M)
     for (int i=0;i<dim_-1;i++){
         if(M(val_[i],val_[i+1])<0)
         {
-            return(-1);
+            fit_=INT_MAX;
         }
 
     S=S+M(val_[i],val_[i+1]);
@@ -42,10 +42,15 @@ double Individu::fitness(const Matrice &M)
 
     if(M(val_[dim_-1],val_[0])<0)
     {
-     return(-1);
+        fit_=INT_MAX;
     }
+
     S=S+M(val_[dim_-1],val_[0]); //decalage entre indice de Chemin et indice dans la Matrice
     fit_=S;
+
+    if (!(this->admissible())) fit_=INT_MAX;
+
+
     return(fit_);
 }
 
@@ -118,7 +123,7 @@ bool Individu::operator<(const Individu &V)
 
 ostream & operator<<(ostream &os, const Individu &V)
 {
-    os<<"Chemin de taille "<<V.dim()<<endl;
+
     for(int i=0; i<V.dim();i++)
     {
         os<<V(i)<<" ";
@@ -137,6 +142,73 @@ istream & operator>>(istream &is, const Individu &V)
     }
     return is;
 }
+
+Individu Individu::mutation(const Matrice &M)
+{
+    int gene_mute1 = rand() %dim_;
+    int gene_mute2 = rand() % dim_;
+    int temp =val_[gene_mute1];
+    set(gene_mute1,val_[gene_mute2],M);
+    set(gene_mute2,temp,M);
+    Individu A =Individu(*this);
+    A.fitness(M);
+    return(A);
+}
+
+Individu crossover(const Individu &Individu1, const Individu &Individu2, const Matrice &M) //on crée un nouvel individu à partir de deux chemins on commence par couper au mileieu
+{   int limite=rand() % Individu1.dim();
+
+    Individu New_I=Individu(Individu1.dim(),M);
+    for(int i=0;i<limite;i++) New_I.set(i,Individu1(i),M);
+
+    for(int i=limite; i<Individu1.dim(); i++) New_I.set(i,Individu2(i),M);
+
+
+
+    New_I.set_fitness(New_I.fitness(M));
+
+
+
+
+
+     return(New_I);
+}
+
+
+Individu Individu::rand_perm(const Matrice &M)
+{
+    for (int i=dim_-1;i>=0;i--){
+        int r=rand()%(i+1);
+        int v=val_[r];
+        val_[r]=val_[i];
+        val_[i]=v;
+    };
+    Individu A=Individu(*this);
+    A.fitness(M);
+    return(A);
+}
+
+bool Individu::admissible()
+{
+    vector<int> marquage=vector<int>(dim_);
+    for(int i=0;i<dim_;i++) marquage[i]=0; //tableau qui marque si on est passé par une ville ou non, 0 pour non 1 pour oui
+    for(int k=0;k<dim_;k++)
+    {
+      if (marquage[val_[k]]==1)
+            {
+                return(false);
+            }
+      else
+      {
+          marquage[val_[k]]=1;
+      }
+    }
+    return(true);
+
+}
+
+
+
 
 
 

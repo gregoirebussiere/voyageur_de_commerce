@@ -22,7 +22,7 @@ end
     plot(Coor(:,1),Coor(:,2),'b-',Coor(:,1),Coor(:,2),'rx'); %on dessine dans l'espace une répresnation exacte
     axis([-1 6 -1 6]);
 
-G=digraph(S,T,WEIGHTS,NAMES)
+
 fclose(fileID);
 
 end

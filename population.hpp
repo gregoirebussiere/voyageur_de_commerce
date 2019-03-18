@@ -7,6 +7,7 @@
 #include "individu.hpp"
 
 
+
 using namespace std;
 
 class Population
@@ -27,10 +28,22 @@ class Population
     Individu acces(int ind) const;
 
     void tri();
-    /*
-    tronque(prop_cons);
-    mutation_pop(prop_mutation);
-    crossover_pop(prop_cross);
-    */
+
+
+
+    void mutation_pop(const Matrice &M);
+
+    void crossover_pop(const Matrice &M);
+    int acces_taille() const;
+    void set_Individu(int i, Individu I);
+
+    void add_alea(const Matrice &M);
+
+    void tronque();
+
+
 };
+
+
+ostream & operator<<(ostream &os, const Population &P);
 #endif

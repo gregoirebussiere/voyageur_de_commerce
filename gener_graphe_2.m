@@ -1,4 +1,4 @@
-function [] = gener_graphe_2( nom_fichier )
+function [G] = gener_graphe_2( nom_fichier )
 fileID=fopen(nom_fichier);
 taille_c=fgetl(fileID);
 taille=str2double(taille_c);
@@ -76,10 +76,8 @@ t_chemin=[2 3 4 5 6 7 8 9 10];
 
 highlight(H,s_chemin,t_chemin,'LineStyle','-','EdgeColor','r','LineWidth',1.5)
 
-texte = ['Chemin de longeur 10'];
 
-
-annotation('textbox', [.2 .8 .1 .1], 'FitHeightToText', 'ON', 'Fontsize', 12,'String', texte);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 fclose(fileID);

@@ -5,6 +5,9 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include<bits/stdc++.h>
+
+
 
 using namespace std;
 
@@ -32,14 +35,20 @@ class Individu
     double fit() const;
     int operator()(int) const;
     void set(int i, int k,const Matrice &M);
+    bool admissible(); //fonction qui vérifie que l'on passe une et une seule fois par chauqe ville
+
 
     bool operator==(const Individu &);
     bool operator !=(const Individu&);
     bool operator < (const Individu&);
+    Individu mutation(const Matrice &);
+
+    Individu rand_perm(const Matrice &);
+
 
     void set_fitness(double);
 };
-
+Individu crossover(const Individu &, const Individu &, const Matrice &);
 
 ostream & operator<<(ostream &, const Individu &);
 istream & operator>>(istream &, Individu &);
